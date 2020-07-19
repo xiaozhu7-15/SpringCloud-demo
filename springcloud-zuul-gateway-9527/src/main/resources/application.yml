@@ -1,0 +1,32 @@
+server:
+  port: 9527
+
+
+spring:
+  application:
+    name: springcloud-zuul-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true
+
+zuul:
+  prefix: #所有服务名前面加个前缀
+  ignored-services: springcloud-provider-dept #忽略真实路由名称。（单个就根据具体服务名忽略，多个用“*”来忽略）
+    #ignored-services:"*"
+  routes:
+    mydept.serviceId: springcloud-provider-dept
+    mydept.path: /mydept/**  #自定义别名来取代真实路由名称
+
+
+#info信息配置
+info:
+  app.name: zhu-springcloud
+  company.name: xiaozhu888.top
+
+
+
